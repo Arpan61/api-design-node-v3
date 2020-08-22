@@ -13,7 +13,19 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
-app.get('/', (req, res) => {
+const log = (req, res, next) => {
+  console.log('logging')
+  next()
+}
+
+const log1 = (req, res, next) => {
+  console.log('In Default Route')
+  next()
+}
+
+app.use(log)
+
+app.get('/', log1, (req, res) => {
   res.send({ message: 'Hello World!' })
 })
 
