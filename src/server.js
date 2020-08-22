@@ -25,6 +25,13 @@ const log1 = (req, res, next) => {
 
 app.use(log)
 
+// Routers in Express to septrate business logic of the APIS
+const router = express.Router()
+router.get('/me', (req, res) => {
+  res.send({ message: 'This is a router' })
+})
+app.use('/api', router)
+
 app.get('/', log1, (req, res) => {
   res.send({ message: 'Hello World!' })
 })
