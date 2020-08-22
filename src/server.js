@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import express from 'express'
 import { json, urlencoded } from 'body-parser'
 import morgan from 'morgan'
@@ -12,4 +13,17 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
-export const start = () => {}
+app.get('/', (req, res) => {
+  res.send({ message: 'Hello World!' })
+})
+
+app.post('/', (req, res) => {
+  console.log(req.body)
+  res.send({ message: 'ok' })
+})
+
+export const start = () => {
+  app.listen(3000, () => {
+    console.log('Server Started on 3000!')
+  })
+}
